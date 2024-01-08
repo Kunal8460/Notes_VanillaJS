@@ -13,28 +13,38 @@
 </head>
 
 <body class="body">
-  <header>
-    <nav class="mx-auto px-3 py-auto navbar navbar-dark bg-dark">
+
+  <!-- header -->
+
+  <header class="sticky-top">
+    <nav class="ms-2 px-3 navbar navbar-dark bg-dark">
       <div class="container-fluid my-3">
         <h3 class="text-white">Sticky Notes</h3>
-        <form class="mt-2 d-flex" role="search">
-          <input class="form-control me-2" type="search" id="searchBox" placeholder="Search" aria-label="Search" />
-        </form>
       </div>
     </nav>
   </header>
 
   <div class="setbg">
-    <div class="mx-3 my-2">
-      <button id="createBtn" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addNoteModal">
-        <i class="bi bi-pencil pe-1"></i>
-        Add Note
-      </button>
+    <div class="mx-3 my-2 d-flex">
+      <div>
+        <button id="createBtn" class="fs-6 bi bi-pencil btn btn-success me-4" data-bs-toggle="modal"
+          data-bs-target="#addNoteModal">
+          <!-- <i class="bi bi-pencil pe-1"></i> -->
+          Add Note
+        </button>
+      </div>
+      <div>
+        <input class="form-control me-2" type="search" id="searchBox" placeholder="Search" aria-label="Search" />
+      </div>
     </div>
 
     <!-- Cards -->
 
-    <div class="row" id="notes-card"></div>
+    <div class="row" id="notes-card">
+
+    </div>
+
+    <!-- Modal -->
 
     <div class="modal fade" id="addNoteModal" tabindex="-1" aria-labelledby="addNoteModalLabel" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered">
@@ -71,6 +81,54 @@
       </div>
     </div>
   </div>
+
+  <!-- footer -->
+
+  <footer class="my-5 text-center bg-dark text-white text-lg-start " style="background-color: rgb(209, 209, 209);;">
+    <section class="d-flex justify-content-center justify-content-lg-around p-4 border-bottom">
+      <div class="d-none d-lg-inline">
+        <span>Get connected with us on social networks:</span>
+      </div>
+
+      <div>
+        <i class="me-4 bi bi-twitter"></i>
+        <i class="me-4 bi bi-facebook"></i>
+        <i class="me-4 bi bi-google"></i>
+        <i class="me-4 bi bi-instagram"></i>
+        <i class="me-4 bi bi-linkedin"></i>
+        <i class="me-4 bi bi-github"></i>
+      </div>
+    </section>
+
+    <section class="">
+      <div class="container text-center text-md-start mt-5">
+        <div class="row mt-3">
+          <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+            <h6 class="text-uppercase fw-bold mb-4">
+              IRIS Business Services Limited
+            </h6>
+            <p>
+              We are passionate about Building Transparency and Driving Growth for businesses around the world.
+            </p>
+          </div>
+
+          <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+            <h6 class="text-uppercase fw-bold mb-4">Contact</h6>
+            <p><i class="bi bi-house-door me-3"></i> Vashi, Navi Mumbai, India</p>
+            <p>
+              <i class="bi bi-envelope me-3"></i>
+              info@example.com
+            </p>
+            <p><i class="bi bi-phone me-3"></i> + 01 234 567 88</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <div class="text-center pt-3">
+      © 2023 Copyright:
+      <a class=" text-reset fw-bold" href="https://irisbusiness.com/">irisbusiness.com</a>
+    </div>
+  </footer>
 </body>
 <script>
   $(document).ready(function () {
@@ -82,6 +140,26 @@
     $("#createBtn").click(function () {
       $(".modal-title").text("Add Note");
     })
+
+
+    $(".expandbtn").click(function (event) {
+      let button = event.target
+      let contentElement = button.parentElement
+      let id = button.parentElement.previousElementSibling.previousElementSibling.value
+      let notes = localStorage.getItem("notes");
+      notes = JSON.parse(notes)
+      notes.forEach(item => {
+        if (item.id === id) {
+          contentElement.innerHTML = item.content;
+          contentElement.nextElementSibling.classList.remove("d-none")
+        }
+      });
+
+    });
+    $(".showlessbtn").click(function (event) {
+
+    })
+
 
   });
 </script>

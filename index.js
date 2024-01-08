@@ -13,34 +13,38 @@ if (localStorage.getItem("notes") !== null) {
 
 searchBox.addEventListener("input", (e) => {
   tempNotes = [];
-  notes.forEach((items) => {
-    title = items.title;
-    content = items.content;
-    if (
-      title.toLowerCase().includes(e.target.value.toLowerCase()) ||
-      content.toLowerCase().includes(e.target.value.toLowerCase())
-    ) {
-      tempNotes.push(items);
-      notesCard.innerHTML = "";
-      tempNotes.forEach((item) => {
-        notesCard.innerHTML += `<div class="col-md-6 col-lg-3 col-sm-6">
-        <div class="m-2">
+  if (e.target.value === "") {
+    showNotes();
+  } else {
+    notes.forEach((items) => {
+      title = items.title;
+      content = items.content;
+      if (
+        title.toLowerCase().includes(e.target.value.toLowerCase()) ||
+        content.toLowerCase().includes(e.target.value.toLowerCase())
+      ) {
+        tempNotes.push(items);
+        notesCard.innerHTML = "";
+        tempNotes.forEach((item) => {
+          notesCard.innerHTML += `<div class="col-md-6 col-lg-3 col-sm-6">
+          <div class="m-2">
           <div class="card">
-            <div class="card-body">
-            <input type="hidden" id="noteid" value="${item.id}"/>
-              <h5 class="card-title">${item.title}</h5>
-              <p class="card-text">
-                ${item.content}
-              </p>
-              <button class="btn-edit btn btn-primary bi bi-pencil-square" onclick="fillData(${item.id})" data-bs-toggle="modal" data-bs-target="#addNoteModal" ></button>
+          <div class="card-body">
+          <input type="hidden" id="noteid" value="${item.id}"/>
+          <h5 class="card-title">${item.title}</h5>
+          <p class="card-text overflow-y-auto" style='height:15vh'>
+          ${item.content}
+          </p>
+          <button class="btn-edit btn btn-primary bi bi-pencil-square" onclick="fillData(${item.id})" data-bs-toggle="modal" data-bs-target="#addNoteModal" ></button>
               <button class="ms-1 btn btn-danger bi bi-trash" onclick="deleteNote(${item.id})"></button>
-            </div>
-          </div>
-        </div>
-      </div>`;
-      });
-    }
-  });
+              </div>
+              </div>
+              </div>
+              </div>`;
+        });
+      }
+    });
+  }
 });
 
 function formValidation(event) {
@@ -116,10 +120,10 @@ function showNotes() {
       notesCard.innerHTML += `<div class="col-md-6 col-lg-3 col-sm-6">
       <div class="m-2">
         <div class="card">
-          <div class="card-body">
+          <div class="card-body ">
           <input type="hidden" id="noteid" value="${item.id}"/>
             <h5 class="card-title">${item.title}</h5>
-            <p class="card-text">
+            <p class="card-text overflow-y-auto" style='height:15vh'>
               ${item.content}
             </p>
             <button class="btn-edit btn btn-primary bi bi-pencil-square" onclick="fillData(${item.id})" data-bs-toggle="modal" data-bs-target="#addNoteModal" ></button>
